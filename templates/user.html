@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Info for {{ user.username }}</h1>
+
+<p>{{ user.username }}</p>
+<p>{{ user.email }}</p>
+<p>{{ user.first_name }} {{ user.last_name }}</p>
+
+<form action="/users/{{ user.username }}/add-feedback">
+<button>Add Feedback</button>
+</form>
+<hr>
+<h2>{{ user.username}}'s Feedback</h2>
+{% for feedback in all_feedback %}
+    {% if user.username  == feedback.username %}
+        <p><a href="/feedback/{{ feedback.id }}">{{ feedback.title }}</a></p>
+        <p>{{ feedback.content }}</p>
+        <hr>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}
